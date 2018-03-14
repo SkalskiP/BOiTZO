@@ -1,5 +1,4 @@
 import curses
-import json
 from .node import Node
 from .utils import Utils
 
@@ -23,7 +22,22 @@ class ViewRutting(object):
     def closeScreen(self):
         self.screen.clear()
         curses.endwin()
-                
+        exit()
+        
+    def readFromUser(self, row, column):
+        
+        self.screen.addstr(row, column, " >> ")
+        
+        curses.echo()
+        curses.curs_set(1)  
+        
+        s = self.screen.getstr(row, column + 4, 15).decode(encoding="utf-8")
+        
+        curses.noecho()             
+        curses.curs_set(0)
+        
+        return s
+        
     def launchMenuView(self):
 
         selection = -1
@@ -53,20 +67,14 @@ class ViewRutting(object):
                 
             if selection == 0 :
                 self.addAlternativesView()
-            if selection == 1 :
+            elif selection == 1 :
                 self.treeNodeView("view", True)
-            if selection == 2 :
-                
-                with open('data.json', 'w') as outfile:
-                    data = {"alternatives": self.alternatives, "gole": self.root}
-                    json.dump(data, outfile, default=lambda o: Utils.parseToDict(o), indent = 4)
-                
+            elif selection == 2 :
+                model = {"alternatives": self.alternatives, "gole": self.root}
+                Utils.saveModelToFile(model, "data.json")
                 self.closeScreen()
-                exit()
-                
             elif q == ord('q') or selection == len(h) -1 :
                 self.closeScreen()
-                exit()
         
     def addAlternativesView(self):
         
@@ -118,14 +126,8 @@ class ViewRutting(object):
             else:
                 self.screen.addstr(1, 4, "Alternatives: {}".format(", ".join(self.alternatives)), curses.A_BOLD)
             
-            curses.echo()
-            curses.curs_set(1)  
-            
-            s = self.screen.getstr(3, 4, 15).decode(encoding="utf-8")
+            s = self.readFromUser(3, 4)
             self.alternatives.append(s)
-
-            curses.noecho()             
-            curses.curs_set(0)
 
             self.addAlternativesView()
             
@@ -151,28 +153,34 @@ class ViewRutting(object):
                 self.screen.addstr(1, 4, " > ".join(history), curses.A_BOLD)
             
             self.screen.addstr(3, 4, "Feature name: {}".format(self.current_node.name if self.current_node.name != None else ""))
-            self.screen.addstr(4, 4, "Feature preferences: [{}]".format(", ".join(self.current_node.preferences) if self.current_node.preferences != [] else ""))
             
-            sub_names = []
-            for sub_feature in self.current_node.children:
-                sub_names.append(sub_feature.name if sub_feature.name != None else "Anonim feature")
+            self.screen.addstr(4, 4, "Feature preferences: {}".format(self.current_node.preferencesToString()))
             
-            self.screen.addstr(5, 4, "Sub-features: [{}]".format(", ".join(sub_names) if self.current_node.children != [] else ""))
-    
+            if self.current_node.isLief():
+                self.screen.addstr(5, 4, "Sub-features: {}".format(self.current_node.children))
+            else:
+                sub_names = []
+                for sub_feature in self.current_node.children:
+                    sub_names.append(sub_feature.name if sub_feature.name != None else "Anonim feature")
+                self.screen.addstr(5, 4, "Sub-features: [{}]".format(", ".join(sub_names) if self.current_node.children != [] else ""))
+            
             if mode == "view":
                 
-                h = [0] * 6
+                h = [0] * 7
                 h[option] = curses.color_pair(1)
                 
                 self.screen.addstr(7, 4, "1 - Edit feature name", h[0])
                 self.screen.addstr(8, 4, "2 - Edit feature preferences", h[1])
                 self.screen.addstr(9, 4, "3 - Add sub-features", h[2])
                 
-                self.screen.addstr(11, 4, "4 - Go to parent", h[3])
+                if self.current_node.isLief():
+                    self.screen.addstr(10, 4, "4 - Set as tree brunch", h[3])
+                else:
+                    self.screen.addstr(10, 4, "4 - Set as tree lief", h[3])
                 
-                self.screen.addstr(12, 4, "5 - Go to sub-feature", h[4])
-                
-                self.screen.addstr(14, 4, "6 - Back ('q')", h[5])
+                self.screen.addstr(12, 4, "5 - Go to parent", h[4])
+                self.screen.addstr(13, 4, "6 - Go to sub-feature", h[5])
+                self.screen.addstr(15, 4, "7 - Back ('q')", h[6])
                 
                 self.screen.refresh()
             
@@ -190,46 +198,39 @@ class ViewRutting(object):
                 elif selection == 2 :
                     self.treeNodeView("add_sub_feature")
                 elif selection == 3:
+                    if self.current_node.isLief():
+                        self.current_node.setAsBrunch()
+                    else:
+                        self.current_node.setAsLief(alternatives_size = len(self.alternatives))
+                    self.treeNodeView()
+                elif selection == 4:
                     self.current_node = self.current_node.parent
                     self.treeNodeView()
-                elif selection == 4 :
+                elif selection == 5 :
                     self.treeNodeView("sub_feature_view")
                 elif q == ord('q') or selection == len(h) -1 :
                     self.launchMenuView()
                     
             elif mode == "edit_name":
                 
-                self.screen.addstr(7, 4, "New feature name:")
+                self.screen.addstr(7, 4, "Set current feature name to:")
                 
-                curses.echo()
-                curses.curs_set(1)  
-                
-                s = self.screen.getstr(8, 4, 15).decode(encoding="utf-8")
-                
-                curses.noecho()             
-                curses.curs_set(0)
+                s = self.readFromUser(9, 4)
                 
                 self.current_node.name = s
                 self.treeNodeView()
                 
             elif mode == "add_sub_feature":
                 
-                self.screen.addstr(7, 4, "Feature name:")
-                
-                curses.echo()
-                curses.curs_set(1)  
-                
-                s = self.screen.getstr(8, 4, 15).decode(encoding="utf-8")
-                
-                curses.noecho()             
-                curses.curs_set(0)
-                
-                tmp = Node()
-                tmp.name = s
-                tmp.parent = self.current_node
-                self.current_node.children.append(tmp)
+                self.screen.addstr(7, 4, "Insert name of new feature:")
+                                
+                name = self.readFromUser(9, 4)
+                self.current_node.addChildWithName(name)
                 self.treeNodeView()
                 
+            elif mode == "edit_props":
+                pass
+                 
             elif mode == "sub_feature_view":
                 
                 h = [0] * (len(self.current_node.children) + 1)
