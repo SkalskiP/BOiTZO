@@ -31,7 +31,7 @@ class ViewRutting(object):
         curses.echo()
         curses.curs_set(1)  
         
-        s = self.screen.getstr(row, column + 4, 15).decode(encoding="utf-8")
+        s = self.screen.getstr(row, column + 4, 100).decode(encoding="utf-8")
         
         curses.noecho()             
         curses.curs_set(0)
@@ -195,6 +195,8 @@ class ViewRutting(object):
                     
                 if selection == 0 :
                     self.treeNodeView("edit_name")
+                elif selection == 1 :
+                    self.treeNodeView("edit_preferences")
                 elif selection == 2 :
                     self.treeNodeView("add_sub_feature")
                 elif selection == 3:
@@ -228,8 +230,16 @@ class ViewRutting(object):
                 self.current_node.addChildWithName(name)
                 self.treeNodeView()
                 
-            elif mode == "edit_props":
-                pass
+            elif mode == "edit_preferences":
+                
+                self.screen.addstr(7, 4, "Insert preferences values in MATLAB notation:")
+                                
+                preferences = self.readFromUser(9, 4)
+                if self.current_node.isLief():
+                    self.current_node.updatePreferences(preferences, len(self.alternatives))
+                else:
+                    self.current_node.updatePreferences(preferences)
+                self.treeNodeView()
                  
             elif mode == "sub_feature_view":
                 

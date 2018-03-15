@@ -1,34 +1,49 @@
 {
     "gole": {
-        "name": "Root",
+        "preferences": [
+            [
+                1,
+                2
+            ],
+            [
+                0.5,
+                1
+            ]
+        ],
         "children": [
             {
-                "name": "F1",
-                "children": [],
-                "preferences": []
-            },
-            {
-                "name": "F1",
-                "children": [],
-                "preferences": []
-            },
-            {
-                "name": "F2",
-                "children": [
-                    {
-                        "name": "F22",
-                        "children": [],
-                        "preferences": []
-                    }
+                "preferences": [
+                    [
+                        1,
+                        4
+                    ],
+                    [
+                        0.25,
+                        1
+                    ]
                 ],
-                "preferences": []
+                "children": "alternatives",
+                "name": "Feature 1"
+            },
+            {
+                "preferences": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        1
+                    ]
+                ],
+                "children": "alternatives",
+                "name": "Feature 2"
             }
         ],
-        "preferences": []
+        "name": "Root"
     },
     "alternatives": [
-        "A1",
-        "A1",
-        "A3"
+        "Alternative 1",
+        "Alternative 2"
     ]
 }

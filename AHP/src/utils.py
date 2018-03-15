@@ -12,5 +12,5 @@ class Utils(object):
         
     @staticmethod
     def saveModelToFile(model, filename):
-        with open(filename, 'w') as outfile:  
+        with open("data/" + filename, 'w') as outfile:  
             json.dump(model, outfile, default=lambda o: Utils.parseToDict(o), indent = 4)

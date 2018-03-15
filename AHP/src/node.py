@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 
 class Node(object):
     def __init__(self):
@@ -33,3 +34,13 @@ class Node(object):
             
     def preferencesToString(self):
         return(json.dumps(self.preferences))
+        
+    def updatePreferences(self, preferences, alternatives_size = None):
+        tmp_preferences = json.loads(preferences)
+        
+        if alternatives_size:
+            if (len(tmp_preferences) == alternatives_size and len(tmp_preferences[0]) == alternatives_size):
+                self.preferences = tmp_preferences
+        else:
+            if (len(self.children) == len(tmp_preferences) and len(self.children) == len(tmp_preferences[0])):
+                self.preferences = tmp_preferences
