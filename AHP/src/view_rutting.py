@@ -1,3 +1,13 @@
+# ======================================================================================================================
+# PROJECT NAME:             Easy AHP Tool
+# FILE NAME:                ViewRutting
+# FILE VERSION:             1.0
+# DATE:                     17.03.2018
+# AUTHOR:                   Piotr Skalski [github.com/SkalskiP]
+# ======================================================================================================================
+# File contains class responsible for rutting views of terminal aplication
+# ======================================================================================================================
+
 import curses
 from .node import Node
 from .utils import Utils
