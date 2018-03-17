@@ -37,6 +37,16 @@ class ViewRutting(object):
         curses.curs_set(0)
         
         return s
+    
+    def introView(self, name):
+        
+        with open(name) as f:
+            content = f.readlines()
+            
+        for index, line in enumerate(content):
+            self.screen.addstr(index + 1, 4, line)
+            
+        self.screen.getch()
         
     def launchMenuView(self):
 
@@ -206,7 +216,8 @@ class ViewRutting(object):
                         self.current_node.setAsLief(alternatives_size = len(self.alternatives))
                     self.treeNodeView()
                 elif selection == 4:
-                    self.current_node = self.current_node.parent
+                    if self.current_node.parent != None:
+                        self.current_node = self.current_node.parent
                     self.treeNodeView()
                 elif selection == 5 :
                     self.treeNodeView("sub_feature_view")
@@ -260,5 +271,9 @@ class ViewRutting(object):
                     option = (option + 1) % len(h)
                 elif q == ord('\n'):
                     selection = option
+                    
+                if q == ord('q') or selection == len(h) -1 :
+                    self.launchMenuView()
+                else:
                     self.current_node = self.current_node.children[option]
                     self.treeNodeView()

@@ -1,5 +1,4 @@
 import json
-from decimal import Decimal
 
 class Node(object):
     def __init__(self):
