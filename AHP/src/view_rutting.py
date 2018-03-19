@@ -284,6 +284,6 @@ class ViewRutting(object):
                     
                 if q == ord('q') or selection == len(h) -1 :
                     self.launchMenuView()
-                else:
+                elif selection != -1:
                     self.current_node = self.current_node.children[option]
                     self.treeNodeView()
