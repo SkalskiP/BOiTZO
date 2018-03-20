@@ -45,11 +45,14 @@ class Node(object):
         return(json.dumps(self.preferences))
         
     def updatePreferences(self, preferences, alternatives_size = None):
-        tmp_preferences = json.loads(preferences)
-        
-        if alternatives_size:
-            if (len(tmp_preferences) == alternatives_size and len(tmp_preferences[0]) == alternatives_size):
-                self.preferences = tmp_preferences
+        try:
+            tmp_preferences = json.loads(preferences)
+        except:
+            return;
         else:
-            if (len(self.children) == len(tmp_preferences) and len(self.children) == len(tmp_preferences[0])):
-                self.preferences = tmp_preferences
+            if alternatives_size:
+                if (len(tmp_preferences) == alternatives_size and len(tmp_preferences[0]) == alternatives_size):
+                    self.preferences = tmp_preferences
+            else:
+                if (len(self.children) == len(tmp_preferences) and len(self.children) == len(tmp_preferences[0])):
+                    self.preferences = tmp_preferences

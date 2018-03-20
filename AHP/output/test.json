@@ -1,0 +1,49 @@
+{
+    "alternatives": [
+        "T1",
+        "T2"
+    ],
+    "gole": {
+        "name": "Root",
+        "children": [
+            {
+                "name": "F1",
+                "children": "alternatives",
+                "preferences": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        3,
+                        4
+                    ]
+                ]
+            },
+            {
+                "name": "F2",
+                "children": "alternatives",
+                "preferences": [
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ]
+                ]
+            }
+        ],
+        "preferences": [
+            [
+                1,
+                2
+            ],
+            [
+                3,
+                4
+            ]
+        ]
+    }
+}

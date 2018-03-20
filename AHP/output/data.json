@@ -1,49 +1,8 @@
 {
+    "alternatives": [],
     "gole": {
-        "preferences": [
-            [
-                1,
-                2
-            ],
-            [
-                0.5,
-                1
-            ]
-        ],
-        "children": [
-            {
-                "preferences": [
-                    [
-                        1,
-                        4
-                    ],
-                    [
-                        0.25,
-                        1
-                    ]
-                ],
-                "children": "alternatives",
-                "name": "Feature 1"
-            },
-            {
-                "preferences": [
-                    [
-                        1,
-                        1
-                    ],
-                    [
-                        1,
-                        1
-                    ]
-                ],
-                "children": "alternatives",
-                "name": "Feature 2"
-            }
-        ],
-        "name": "Root"
-    },
-    "alternatives": [
-        "Alternative 1",
-        "Alternative 2"
-    ]
+        "name": null,
+        "preferences": [],
+        "children": []
+    }
 }

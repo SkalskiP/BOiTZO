@@ -41,12 +41,12 @@ class ViewRutting(object):
         curses.echo()
         curses.curs_set(1)  
         
-        s = self.screen.getstr(row, column + 4, 100).decode(encoding="utf-8")
+        input_text = self.screen.getstr(row, column + 4, 100).decode(encoding="utf-8")
         
         curses.noecho()             
         curses.curs_set(0)
         
-        return s
+        return input_text
     
     def introView(self, name):
         
@@ -66,15 +66,15 @@ class ViewRutting(object):
         while selection < 0:
             self.screen.clear()
             
-            h = [0] * 4
+            h = [0] * 5
             h[option] = curses.color_pair(1)
     
             self.screen.addstr(1, 4, "Please select an option...", curses.A_BOLD)
             self.screen.addstr(3, 4, "1 - Add alternatives", h[0])
             self.screen.addstr(4, 4, "2 - Build hierarchy of features", h[1])
-            self.screen.addstr(5, 4, "3 - Get data", h[2])
-            self.screen.addstr(6, 4, "4 - Exit ('q')", h[3])
-            self.screen.refresh()
+            self.screen.addstr(5, 4, "3 - Save as JSON file", h[2])
+            self.screen.addstr(6, 4, "4 - Load from JSON file", h[3])
+            self.screen.addstr(8, 4, "5 - Exit ('q')", h[4])
             
             q = self.screen.getch()
             
@@ -88,11 +88,11 @@ class ViewRutting(object):
             if selection == 0 :
                 self.addAlternativesView()
             elif selection == 1 :
-                self.treeNodeView("view", True)
+                self.treeNodeView("view")
             elif selection == 2 :
-                model = {"alternatives": self.alternatives, "gole": self.root}
-                Utils.saveModelToFile(model, "data.json")
-                self.closeScreen()
+                self.treeNodeView("insert_file_name")
+            elif selection == 3 :
+                self.selectFileToLoad()
             elif q == ord('q') or selection == len(h) -1 :
                 self.closeScreen()
         
@@ -114,7 +114,6 @@ class ViewRutting(object):
             
             self.screen.addstr(3, 4, "1 - Add new alternative", h[0])
             self.screen.addstr(4, 4, "2 - Back ('q')", h[1])
-            self.screen.refresh()
             
             q = self.screen.getch()
             
@@ -151,7 +150,49 @@ class ViewRutting(object):
 
             self.addAlternativesView()
             
-    def treeNodeView(self, mode = "view", start = False):
+    def selectFileToLoad(self):
+        
+        selection = -1
+        option = 0
+        
+        file_list = Utils.getFilesInDir();
+        
+        while selection < 0:
+            self.screen.clear()
+            
+            self.screen.addstr(1, 4, "Select file you wish to open: ", curses.A_BOLD)
+            
+            h = [0] * (len(file_list) + 1)
+            h[option] = curses.color_pair(1)
+            
+            for index, value in enumerate(file_list):
+                self.screen.addstr(3 + index, 4, "{} - {}".format(index + 1, value), h[index])
+                    
+            self.screen.addstr(3 + len(file_list) + 1, 4, "{} - Back ('q')".format(len(file_list) + 1), h[len(file_list)])
+                
+            q = self.screen.getch()
+            
+            if q == curses.KEY_UP:
+                option = (option - 1) % len(h)
+            elif q == curses.KEY_DOWN:
+                option = (option + 1) % len(h)
+            elif q == ord('\n'):
+                selection = option
+            
+            if q == ord('q') or selection == len(h) -1 :
+                self.launchMenuView()
+            elif selection != -1:
+                
+                root, alternatives = Utils.loadModelFromFile(file_list[selection])
+                
+                if root != None and alternatives != None:
+                    self.root = root
+                    self.alternatives = alternatives
+                    self.current_node = self.root
+                
+                self.launchMenuView()
+            
+    def treeNodeView(self, mode = "view"):
         
         selection = -1
         option = 0
@@ -170,7 +211,7 @@ class ViewRutting(object):
                     history.insert(0, (marker.name if marker.name != None else "Anonim feature"))
                     marker = marker.parent
                     
-                self.screen.addstr(1, 4, " > ".join(history), curses.A_BOLD)
+                self.screen.addstr(1, 4, "Current brunch: " + " > ".join(history), curses.A_BOLD)
             
             self.screen.addstr(3, 4, "Feature name: {}".format(self.current_node.name if self.current_node.name != None else ""))
             
@@ -202,8 +243,6 @@ class ViewRutting(object):
                 self.screen.addstr(13, 4, "6 - Go to sub-feature", h[5])
                 self.screen.addstr(15, 4, "7 - Back ('q')", h[6])
                 
-                self.screen.refresh()
-            
                 q = self.screen.getch()
                 
                 if q == curses.KEY_UP:
@@ -251,11 +290,23 @@ class ViewRutting(object):
                 self.current_node.addChildWithName(name)
                 self.treeNodeView()
                 
+            elif mode == "insert_file_name":
+                
+                self.screen.addstr(7, 4, "Insert file name:")
+                                
+                name = self.readFromUser(9, 4)
+                self.current_node.addChildWithName(name)
+                
+                model = {"alternatives": self.alternatives, "gole": self.root}
+                Utils.saveModelToFile(model, name + ".json")                
+                self.treeNodeView()
+                
             elif mode == "edit_preferences":
                 
                 self.screen.addstr(7, 4, "Insert preferences values in MATLAB notation:")
+                self.screen.addstr(8, 4, "[If you don't want to change preferences values just press Enter]")
                                 
-                preferences = self.readFromUser(9, 4)
+                preferences = self.readFromUser(10, 4)
                 if self.current_node.isLief():
                     self.current_node.updatePreferences(preferences, len(self.alternatives))
                 else:
@@ -272,7 +323,6 @@ class ViewRutting(object):
                     
                 self.screen.addstr(7 + len(self.current_node.children) + 1, 4, "{} - Back ('q')".format(len(self.current_node.children) + 1), h[len(self.current_node.children)])
                 
-                self.screen.refresh()
                 q = self.screen.getch()
                 
                 if q == curses.KEY_UP:
