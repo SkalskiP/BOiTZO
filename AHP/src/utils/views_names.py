@@ -1,24 +1,26 @@
 # ======================================================================================================================
 # PROJECT NAME:             Easy AHP Tool
-# FILE NAME:                intro_view
+# FILE NAME:                ViewsNames
 # FILE VERSION:             1.0
 # DATE:                     25.03.2018
 # AUTHOR:                   Piotr Skalski [github.com/SkalskiP]
 # ======================================================================================================================
-# File contains function used to create app view used visible at the very beginning of app.
+# File contains enum that is holding names of all views used in project
 # ======================================================================================================================
 
 
-from ..utils.views_names import ViewsNames
+from enum import Enum
 
 
-def intro_view(router):
-        
-    with open("./data/intro.txt") as f:
-        content = f.readlines()
-        
-    for index, line in enumerate(content):
-        router.screen.addstr(index + 1, 4, line)
-        
-    router.screen.getch()
-    router.current_view = ViewsNames.LUNCH_MENU
+class ViewsNames(Enum):
+    INTRO = 1
+    LUNCH_MENU = 2
+    ADD_ALTERNATIVES = 3
+    READ_ALTERNATIVES = 4
+    SELECT_FILE_TO_LOAD = 5
+    TREE_NODE = 6
+    INSERT_FILE_NAME = 7
+    EDIT_NODE_NAME = 8
+    EDIT_PREFERENCES = 9
+    ADD_SUB_FEATURE = 10
+    SHOW_SUB_FEATURE = 11

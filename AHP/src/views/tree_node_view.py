@@ -1,6 +1,17 @@
-from ..util.file_utils import FileUtils
+# ======================================================================================================================
+# PROJECT NAME:             Easy AHP Tool
+# FILE NAME:                tree_node_view
+# FILE VERSION:             1.0
+# DATE:                     25.03.2018
+# AUTHOR:                   Piotr Skalski [github.com/SkalskiP]
+# ======================================================================================================================
+# File contains function used to create app view used to perform all major operations on tree node.
+# ======================================================================================================================
+
+
+from ..utils.file_utils import FileUtils
 import curses
-from ..util.views_names import ViewsNames
+from ..utils.views_names import ViewsNames
 
 
 def tree_node_view(router):

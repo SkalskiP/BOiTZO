@@ -1,11 +1,11 @@
 # ======================================================================================================================
 # PROJECT NAME:             Easy AHP Tool
-# FILE NAME:                ViewRutting
+# FILE NAME:                view_rutting
 # FILE VERSION:             1.0
 # DATE:                     17.03.2018
 # AUTHOR:                   Piotr Skalski [github.com/SkalskiP]
 # ======================================================================================================================
-# File contains class responsible for rutting views of terminal aplication
+# File contains class responsible for rutting views of terminal application.
 # ======================================================================================================================
 
 import curses
@@ -16,7 +16,7 @@ from .views.launch_menu_view import launch_menu_view
 from .views.select_file_to_load_view import select_file_to_load
 from .views.read_alternative_view import read_alternative_view
 from .views.tree_node_view import tree_node_view
-from .util.views_names import ViewsNames
+from .utils.views_names import ViewsNames
 
 
 class ViewRutting:

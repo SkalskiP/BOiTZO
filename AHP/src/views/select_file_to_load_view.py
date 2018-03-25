@@ -1,6 +1,17 @@
-from ..util.file_utils import FileUtils
+# ======================================================================================================================
+# PROJECT NAME:             Easy AHP Tool
+# FILE NAME:                select_file_to_load_view
+# FILE VERSION:             1.0
+# DATE:                     25.03.2018
+# AUTHOR:                   Piotr Skalski [github.com/SkalskiP]
+# ======================================================================================================================
+# File contains function used to create app view used to select which JSON file should be loaded.
+# ======================================================================================================================
+
+
+from ..utils.file_utils import FileUtils
 import curses
-from ..util.views_names import ViewsNames
+from ..utils.views_names import ViewsNames
 
 
 def select_file_to_load(router):

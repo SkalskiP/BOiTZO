@@ -1,5 +1,16 @@
+# ======================================================================================================================
+# PROJECT NAME:             Easy AHP Tool
+# FILE NAME:                launch_menu_view
+# FILE VERSION:             1.0
+# DATE:                     25.03.2018
+# AUTHOR:                   Piotr Skalski [github.com/SkalskiP]
+# ======================================================================================================================
+# File contains function used to create main app view.
+# ======================================================================================================================
+
+
 import curses
-from ..util.views_names import ViewsNames
+from ..utils.views_names import ViewsNames
 
 
 def launch_menu_view(router):

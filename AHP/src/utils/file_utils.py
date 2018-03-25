@@ -1,6 +1,6 @@
 # ======================================================================================================================
 # PROJECT NAME:             Easy AHP Tool
-# FILE NAME:                Utils
+# FILE NAME:                FileUtils
 # FILE VERSION:             1.0
 # DATE:                     17.03.2018
 # AUTHOR:                   Piotr Skalski [github.com/SkalskiP]
