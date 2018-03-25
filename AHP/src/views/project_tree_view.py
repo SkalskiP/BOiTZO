@@ -1,3 +1,14 @@
+# ======================================================================================================================
+# PROJECT NAME:             Easy AHP Tool
+# FILE NAME:                project_tree_view
+# FILE VERSION:             1.0
+# DATE:                     25.03.2018
+# AUTHOR:                   Piotr Skalski [github.com/SkalskiP]
+# ======================================================================================================================
+# File contains function used to create app view used to add alternatives for AHP model.
+# ======================================================================================================================
+
+
 import curses
 import asciitree
 from ..utils.file_utils import FileUtils
