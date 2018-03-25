@@ -1,6 +1,7 @@
 import curses
 
-def readAlternativeView(ruter):
+
+def read_alternative_view(ruter):
         ruter.screen.clear()
         
         if len(ruter.alternatives) == 0:
@@ -8,7 +9,7 @@ def readAlternativeView(ruter):
         else:
             ruter.screen.addstr(1, 4, "Alternatives: {}".format(", ".join(ruter.alternatives)), curses.A_BOLD)
         
-        s = ruter.readTextFromUser(3, 4)
+        s = ruter.read_text_from_user(3, 4)
         ruter.alternatives.append(s)
 
         ruter.current_view = "add_alternatives_view"

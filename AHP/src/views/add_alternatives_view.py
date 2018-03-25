@@ -1,25 +1,26 @@
 import curses
 
-def addAlternativesView(ruter):
+
+def add_alternatives_view(router):
         
     selection = -1
     option = 0
     
     while selection < 0:
-        ruter.screen.clear()
+        router.screen.clear()
         
         h = [0] * 2
         h[option] = curses.color_pair(1)
         
-        if len(ruter.alternatives) == 0:
-            ruter.screen.addstr(1, 4, "You have no alternatives yet...", curses.A_BOLD)
+        if len(router.alternatives) == 0:
+            router.screen.addstr(1, 4, "You have no alternatives yet...", curses.A_BOLD)
         else:
-            ruter.screen.addstr(1, 4, "Alternatives: {}".format(", ".join(ruter.alternatives)), curses.A_BOLD)
+            router.screen.addstr(1, 4, "Alternatives: {}".format(", ".join(router.alternatives)), curses.A_BOLD)
         
-        ruter.screen.addstr(3, 4, "1 - Add new alternative", h[0])
-        ruter.screen.addstr(4, 4, "2 - Back ('q')", h[1])
+        router.screen.addstr(3, 4, "1 - Add new alternative", h[0])
+        router.screen.addstr(4, 4, "2 - Back ('q')", h[1])
         
-        q = ruter.screen.getch()
+        q = router.screen.getch()
         
         if q == curses.KEY_UP:
             option = (option - 1) % len(h)
@@ -29,6 +30,6 @@ def addAlternativesView(ruter):
             selection = option
             
         if selection == 0 :
-            ruter.current_view = "read_alternative_view"
+            router.current_view = "read_alternative_view"
         elif q == ord('q') or selection == len(h) -1 :
-            ruter.current_view = "lunch_menu_view"
+            router.current_view = "lunch_menu_view"

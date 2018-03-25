@@ -8,9 +8,9 @@
 # Main file used to run Easy AHP Tool in terminal
 # ======================================================================================================================
 
-from src.view_rutting import ViewRutting
+from src.view_routing import ViewRutting
+
 
 if __name__ == '__main__':
-    view_rutting = ViewRutting()
-    view_rutting.views["intro_view"]
-    view_rutting.runApp()
+    view_routing = ViewRutting()
+    view_routing.run_app()

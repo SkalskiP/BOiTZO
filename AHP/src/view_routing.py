@@ -10,41 +10,43 @@
 
 import curses
 from .node import Node
-from .views.intro_view import introView
-from .views.add_alternatives_view import addAlternativesView
-from .views.launch_menu_view import launchMenuView
-from .views.select_file_to_load_view import selectFileToLoad
-from .views.read_alternative_view import readAlternativeView
-from .views.tree_node_view import treeNodeView
+from .views.intro_view import intro_view
+from .views.add_alternatives_view import add_alternatives_view
+from .views.launch_menu_view import launch_menu_view
+from .views.select_file_to_load_view import select_file_to_load
+from .views.read_alternative_view import read_alternative_view
+from .views.tree_node_view import tree_node_view
 
-class ViewRutting(object):
+
+class ViewRutting:
     def __init__(self): 
         self.alternatives = []
         self.root = Node()
         self.current_node = self.root
-        self.screen = self.initScreen()
+        self.screen = self.init_screen()
         self.running = True
-        self.current_view = "lunch_menu_view"
+        self.current_view = "intro_view"
         self.views = {
-            "intro_view": introView,
-            "lunch_menu_view": launchMenuView,
-            "add_alternatives_view": addAlternativesView,
-            "read_alternative_view": readAlternativeView,
-            "select_file_to_load": selectFileToLoad,
-            "tree_node_view": treeNodeView,
-            "insert_file_name": treeNodeView,
-            "edit_name": treeNodeView,
-            "edit_preferences": treeNodeView,
-            "add_sub_feature": treeNodeView,
-            "sub_feature_view": treeNodeView
+            "intro_view": intro_view,
+            "lunch_menu_view": launch_menu_view,
+            "add_alternatives_view": add_alternatives_view,
+            "read_alternative_view": read_alternative_view,
+            "select_file_to_load": select_file_to_load,
+            "tree_node_view": tree_node_view,
+            "insert_file_name": tree_node_view,
+            "edit_name": tree_node_view,
+            "edit_preferences": tree_node_view,
+            "add_sub_feature": tree_node_view,
+            "sub_feature_view": tree_node_view
         }
             
-    def runApp(self):
-        while(self.running):
+    def run_app(self):
+        while self.running:
             self.views[self.current_view](self)
-        self.closeScreen()
-        
-    def initScreen(self):
+        self.close_screen()
+
+    @staticmethod
+    def init_screen():
         screen = curses.initscr()
         curses.noecho()             
         curses.curs_set(0)          
@@ -54,12 +56,12 @@ class ViewRutting(object):
         
         return screen
         
-    def closeScreen(self):
+    def close_screen(self):
         self.screen.clear()
         curses.endwin()
         exit()
         
-    def readTextFromUser(self, row, column):
+    def read_text_from_user(self, row, column):
         
         self.screen.addstr(row, column, " >> ")
         

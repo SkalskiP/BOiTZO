@@ -1,0 +1,64 @@
+{
+    "gole": {
+        "name": "Root",
+        "children": [
+            {
+                "name": "F1",
+                "children": "alternatives",
+                "preferences": [
+                    [
+                        1,
+                        2,
+                        4
+                    ],
+                    [
+                        0.5,
+                        1,
+                        8
+                    ],
+                    [
+                        0.25,
+                        0.125,
+                        1
+                    ]
+                ]
+            },
+            {
+                "name": "F2",
+                "children": "alternatives",
+                "preferences": [
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        0.5,
+                        1,
+                        0.3333
+                    ],
+                    [
+                        0.3333,
+                        3,
+                        1
+                    ]
+                ]
+            }
+        ],
+        "preferences": [
+            [
+                1,
+                2
+            ],
+            [
+                0.5,
+                1
+            ]
+        ]
+    },
+    "alternatives": [
+        "A1",
+        "A2",
+        "A3"
+    ]
+}
