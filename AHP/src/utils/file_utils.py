@@ -12,6 +12,7 @@ from src.node import Node
 from os import listdir
 from os.path import isfile, join
 import json
+from collections import OrderedDict as OD
 
 
 class FileUtils:
@@ -45,6 +46,13 @@ class FileUtils:
             new_node.children = [FileUtils.get_node(child, new_node) for child in dictionary["children"]]
 
         return new_node
+
+    @staticmethod
+    def get_brief_tree(root, alternatives):
+        if root.children == "alternatives":
+            return OD([(alternative, {}) for alternative in alternatives])
+        else:
+            return OD([(child.name, FileUtils.get_brief_tree(child, alternatives)) for child in root.children])
 
     @staticmethod
     def load_model_from_file(filename, directory="output"):

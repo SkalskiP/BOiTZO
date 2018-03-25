@@ -24,3 +24,4 @@ class ViewsNames(Enum):
     EDIT_PREFERENCES = 9
     ADD_SUB_FEATURE = 10
     SHOW_SUB_FEATURE = 11
+    SHOW_PROJECT_TREE = 12

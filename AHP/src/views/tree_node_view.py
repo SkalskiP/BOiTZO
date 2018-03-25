@@ -98,11 +98,13 @@ def tree_node_view(router):
 
         elif router.current_view == ViewsNames.EDIT_NODE_NAME:
 
-            router.screen.addstr(7, 4, "Set current feature name to:")
+            router.screen.addstr(7, 4, "Type in new node name  or insert q to aboard:")
 
             s = router.read_text_from_user(9, 4)
 
-            router.current_node.name = s
+            if s is not "q":
+                router.current_node.name = s
+
             router.current_view = ViewsNames.TREE_NODE
 
         elif router.current_view == ViewsNames.ADD_SUB_FEATURE:

@@ -20,8 +20,12 @@ def read_alternative_view(ruter):
             ruter.screen.addstr(1, 4, "You have no alternatives yet...", curses.A_BOLD)
         else:
             ruter.screen.addstr(1, 4, "Alternatives: {}".format(", ".join(ruter.alternatives)), curses.A_BOLD)
-        
-        s = ruter.read_text_from_user(3, 4)
-        ruter.alternatives.append(s)
+
+        ruter.screen.addstr(2, 4, "Type in name of new alternative or insert q to aboard:")
+
+        s = ruter.read_text_from_user(4, 4)
+
+        if s is not "q":
+            ruter.alternatives.append(s)
 
         ruter.current_view = ViewsNames.ADD_ALTERNATIVES
