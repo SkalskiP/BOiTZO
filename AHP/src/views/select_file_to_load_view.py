@@ -1,5 +1,6 @@
 from ..util.file_utils import FileUtils
 import curses
+from ..util.views_names import ViewsNames
 
 
 def select_file_to_load(router):
@@ -31,7 +32,7 @@ def select_file_to_load(router):
             selection = option
 
         if q == ord('q') or selection == len(h) - 1:
-            router.current_view = "lunch_menu_view"
+            router.current_view = ViewsNames.LUNCH_MENU
         elif selection != -1:
 
             root, alternatives = FileUtils.load_model_from_file(file_list[selection])
@@ -41,4 +42,4 @@ def select_file_to_load(router):
                 router.alternatives = alternatives
                 router.current_node = router.root
 
-            router.current_view = "lunch_menu_view"
+            router.current_view = ViewsNames.LUNCH_MENU

@@ -1,3 +1,6 @@
+from ..util.views_names import ViewsNames
+
+
 def intro_view(router):
         
     with open("./data/intro.txt") as f:
@@ -7,4 +10,4 @@ def intro_view(router):
         router.screen.addstr(index + 1, 4, line)
         
     router.screen.getch()
-    router.current_view = "lunch_menu_view"
+    router.current_view = ViewsNames.LUNCH_MENU

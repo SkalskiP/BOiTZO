@@ -16,6 +16,7 @@ from .views.launch_menu_view import launch_menu_view
 from .views.select_file_to_load_view import select_file_to_load
 from .views.read_alternative_view import read_alternative_view
 from .views.tree_node_view import tree_node_view
+from .util.views_names import ViewsNames
 
 
 class ViewRutting:
@@ -25,19 +26,19 @@ class ViewRutting:
         self.current_node = self.root
         self.screen = self.init_screen()
         self.running = True
-        self.current_view = "intro_view"
+        self.current_view = ViewsNames.INTRO
         self.views = {
-            "intro_view": intro_view,
-            "lunch_menu_view": launch_menu_view,
-            "add_alternatives_view": add_alternatives_view,
-            "read_alternative_view": read_alternative_view,
-            "select_file_to_load": select_file_to_load,
-            "tree_node_view": tree_node_view,
-            "insert_file_name": tree_node_view,
-            "edit_name": tree_node_view,
-            "edit_preferences": tree_node_view,
-            "add_sub_feature": tree_node_view,
-            "sub_feature_view": tree_node_view
+            ViewsNames.INTRO: intro_view,
+            ViewsNames.LUNCH_MENU: launch_menu_view,
+            ViewsNames.ADD_ALTERNATIVES: add_alternatives_view,
+            ViewsNames.READ_ALTERNATIVES: read_alternative_view,
+            ViewsNames.SELECT_FILE_TO_LOAD: select_file_to_load,
+            ViewsNames.TREE_NODE: tree_node_view,
+            ViewsNames.INSERT_FILE_NAME: tree_node_view,
+            ViewsNames.EDIT_NODE_NAME: tree_node_view,
+            ViewsNames.EDIT_PREFERENCES: tree_node_view,
+            ViewsNames.ADD_SUB_FEATURE: tree_node_view,
+            ViewsNames.SHOW_SUB_FEATURE: tree_node_view
         }
             
     def run_app(self):

@@ -1,4 +1,5 @@
 import curses
+from ..util.views_names import ViewsNames
 
 
 def add_alternatives_view(router):
@@ -29,7 +30,7 @@ def add_alternatives_view(router):
         elif q == ord('\n'):
             selection = option
             
-        if selection == 0 :
-            router.current_view = "read_alternative_view"
-        elif q == ord('q') or selection == len(h) -1 :
-            router.current_view = "lunch_menu_view"
+        if selection == 0:
+            router.current_view = ViewsNames.READ_ALTERNATIVES
+        elif q == ord('q') or selection == len(h) - 1:
+            router.current_view = ViewsNames.LUNCH_MENU

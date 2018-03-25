@@ -1,4 +1,5 @@
 import curses
+from ..util.views_names import ViewsNames
 
 
 def launch_menu_view(router):
@@ -28,12 +29,12 @@ def launch_menu_view(router):
             selection = option
 
         if selection == 0:
-            router.current_view = "add_alternatives_view"
+            router.current_view = ViewsNames.ADD_ALTERNATIVES
         elif selection == 1:
-            router.current_view = "tree_node_view"
+            router.current_view = ViewsNames.TREE_NODE
         elif selection == 2:
-            router.current_view = "insert_file_name"
+            router.current_view = ViewsNames.INSERT_FILE_NAME
         elif selection == 3:
-            router.current_view = "select_file_to_load"
+            router.current_view = ViewsNames.SELECT_FILE_TO_LOAD
         elif q == ord('q') or selection == len(h) - 1:
             router.running = False

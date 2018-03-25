@@ -51,7 +51,7 @@ class FileUtils:
         try:
             model_data = open(directory + "/" + filename).read()
             model_json = json.loads(model_data)
-            root = FileUtils.get_node(model_json["gole"])
+            root = FileUtils.get_node(model_json["goal"])
         except:
             return None, None
         else:

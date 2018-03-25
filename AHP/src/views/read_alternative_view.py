@@ -1,4 +1,5 @@
 import curses
+from ..util.views_names import ViewsNames
 
 
 def read_alternative_view(ruter):
@@ -12,4 +13,4 @@ def read_alternative_view(ruter):
         s = ruter.read_text_from_user(3, 4)
         ruter.alternatives.append(s)
 
-        ruter.current_view = "add_alternatives_view"
+        ruter.current_view = ViewsNames.ADD_ALTERNATIVES

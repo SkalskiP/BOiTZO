@@ -1,0 +1,15 @@
+from enum import Enum
+
+
+class ViewsNames(Enum):
+    INTRO = 1
+    LUNCH_MENU = 2
+    ADD_ALTERNATIVES = 3
+    READ_ALTERNATIVES = 4
+    SELECT_FILE_TO_LOAD = 5
+    TREE_NODE = 6
+    INSERT_FILE_NAME = 7
+    EDIT_NODE_NAME = 8
+    EDIT_PREFERENCES = 9
+    ADD_SUB_FEATURE = 10
+    SHOW_SUB_FEATURE = 11
