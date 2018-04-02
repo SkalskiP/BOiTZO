@@ -1,0 +1,100 @@
+{
+  "goal": {
+    "name": "Kupno",
+    "preferences": [
+      [
+        1.0,
+        2.0
+      ],
+      [
+        2.0,
+        1.0
+      ]
+    ],
+    "children": [
+      {
+        "name": "Cena",
+        "preferences": [
+          [
+            1.0,
+            2.0,
+            3.0
+          ],
+          [
+            2.0,
+            1.0,
+            3.0
+          ],
+          [
+            3.0,
+            2.0,
+            1.0
+          ]
+        ],
+        "children": "alternatives"
+      },
+      {
+        "name": "Komfort",
+        "preferences": [
+          [
+            1.0,
+            2.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ],
+        "children": [
+          {
+            "name": "Kola",
+            "preferences": [
+              [
+                1.0,
+                2.0,
+                3.0
+              ],
+              [
+                2.0,
+                1.0,
+                3.0
+              ],
+              [
+                3.0,
+                2.0,
+                1.0
+              ]
+            ],
+            "children": "alternatives"
+          },
+          {
+            "name": "Siedzenie",
+            "preferences": [
+              [
+                1.0,
+                3.0,
+                3.0
+              ],
+              [
+                1.0,
+                1.0,
+                1.0
+              ],
+              [
+                1.0,
+                1.0,
+                1.0
+              ]
+            ],
+            "children": "alternatives"
+          }
+        ]
+      }
+    ]
+  },
+  "alternatives": [
+    "Rower",
+    "Lyzwy",
+    "Hulajnoga"
+  ]
+}

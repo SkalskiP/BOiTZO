@@ -1,0 +1,113 @@
+{
+    "goal": {
+        "children": [
+            {
+                "children": [],
+                "name": "Comfort",
+                "preferences": [
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        2,
+                        3
+                    ]
+                ]
+            },
+            {
+                "children": [],
+                "name": "Horse Power",
+                "preferences": [
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        2,
+                        3
+                    ]
+                ]
+            },
+            {
+                "children": [],
+                "name": "Price",
+                "preferences": [
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        2,
+                        3
+                    ]
+                ]
+            },
+            {
+                "children": [],
+                "name": "Safety",
+                "preferences": [
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        2,
+                        3
+                    ],
+                    [
+                        1,
+                        2,
+                        3
+                    ]
+                ]
+            }
+        ],
+        "name": "Family Car",
+        "preferences": [
+            [
+                1,
+                2,
+                3
+            ],
+            [
+                1,
+                2,
+                3
+            ],
+            [
+                1,
+                2,
+                3
+            ]
+        ]
+    },
+    "alternatives": [
+        "honda",
+        "mitsubishi",
+        "ford"
+    ]
+}
