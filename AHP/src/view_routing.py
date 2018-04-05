@@ -17,6 +17,7 @@ from .views.select_file_to_load_view import select_file_to_load
 from .views.read_alternative_view import read_alternative_view
 from .views.tree_node_view import tree_node_view
 from .views.project_tree_view import project_tree_view
+from .views.project_ranking_view import project_ranking_view
 from .utils.views_names import ViewsNames
 
 
@@ -40,7 +41,8 @@ class ViewRutting:
             ViewsNames.EDIT_PREFERENCES: tree_node_view,
             ViewsNames.ADD_SUB_FEATURE: tree_node_view,
             ViewsNames.SHOW_SUB_FEATURE: tree_node_view,
-            ViewsNames.SHOW_PROJECT_TREE: project_tree_view
+            ViewsNames.SHOW_PROJECT_TREE: project_tree_view,
+            ViewsNames.SHOW_RANKING: project_ranking_view
         }
             
     def run_app(self):

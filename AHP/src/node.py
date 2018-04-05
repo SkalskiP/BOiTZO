@@ -9,6 +9,7 @@
 # ======================================================================================================================
 
 import json
+import numpy as np
 
 
 class Node:
@@ -41,6 +42,16 @@ class Node:
         self.preferences = []
         for i in range(size):
             self.preferences.append([0] * size)
+
+    def validate_tree(self, alternatives_size):
+        if self.children == "alternatives":
+            return np.array(self.preferences).shape == (alternatives_size, alternatives_size)
+        else:
+            num_of_children = len(self.children)
+            if np.array(self.preferences).shape == (num_of_children, num_of_children):
+                return all(child.validate_tree(alternatives_size) for child in self.children)
+            else:
+                return False
 
     def preferences_to_string(self):
         return json.dumps(self.preferences)

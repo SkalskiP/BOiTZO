@@ -20,7 +20,7 @@ def launch_menu_view(router):
     while selection < 0:
         router.screen.clear()
 
-        h = [0] * 6
+        h = [0] * 7
         h[option] = curses.color_pair(1)
 
         router.screen.addstr(1, 4, "Please select an option...", curses.A_BOLD)
