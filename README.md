@@ -11,6 +11,14 @@ Library was originally created as part of a semester project on Operational rese
 
 To use library, it is necessary to have Python 3.5 installed along with the basic libraries supporting the calculation of the linear albebra. If you are a Ubuntu distribution user you are lucky, you can install all dependencies using the simple script contained inside repository. ``` setup_python_with_env.sh ``` For Windows users, the easiest way will be to install [Anaconda][1] and downloading the source code.
 
+### Demo
+
+Check how EasyAHPTool handles the calculation of the ranking based on the data read from the file.
+
+<p align="center"> 
+<img src="AHP/doc/ahp_demo.gif">
+</p>
+
 ### Input file format
 
 The library requires that the load file that defines the AHP decision tree has the following [structure][2].
